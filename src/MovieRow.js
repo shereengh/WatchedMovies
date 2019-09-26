@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { watchedMovie } from "./stores/action";
+import { connect } from "react-redux";
 
 class MovieRow extends Component {
   render() {
@@ -8,7 +10,11 @@ class MovieRow extends Component {
       <tr>
         <td>{movie.movie.name}</td>
         <td>
-          <button type="button" class="btn btn-info">
+          <button
+            type="button"
+            class="btn btn-info"
+            onClick={movieId => this.props.watchedMovie(movieId)}
+          >
             Watched
           </button>
           <button type="button" class="btn btn-danger">
@@ -20,4 +26,17 @@ class MovieRow extends Component {
   }
 }
 
-export default MovieRow;
+const mapStateToProps = state => {
+  return {
+    movies: state.movies
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    watchedMovie: () => dispatch(watchedMovie())
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MovieRow);

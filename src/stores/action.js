@@ -16,8 +16,9 @@ export const deleteMovie = movieId => {
   };
 };
 
-export const watchedMovie = () => {
+export const watchedMovie = movieId => {
   return {
-    type: WATCHED_MOVIE
+    type: WATCHED_MOVIE,
+    payload: movieId
   };
 };
